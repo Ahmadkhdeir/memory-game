@@ -1,3 +1,4 @@
+/* Reset and Base Styles */
 * {
     box-sizing: border-box;
 }
@@ -6,6 +7,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Game Info Container */
 .info-container {
     width: 1080px;
     margin: 20px auto 0;
@@ -28,11 +30,16 @@ body {
     text-align: right;
 }
 
+/* Game Container and Blocks */
 .game-container {
     display: flex;
     width: 1100px;
     flex-wrap: wrap;
     margin: 20px auto;
+}
+
+.game-container.no-clicking {
+    pointer-events: none;
 }
 
 .game-container .game-block {
@@ -45,30 +52,7 @@ body {
     margin: 0 10px 20px;
 }
 
-.game-container .game-block .front {
-    background-color: #333;
-    line-height: 200px;
-} 
-
-.game-container .game-block .front::before { 
-    content: '?';
-    color: #fff;
-    font-size: 140px;
-    font-weight: bold;
-}
-
-
-.game-container .game-block .back {
-    background-color: #607D8B;
-    transform: rotateY(180deg);
-} 
-
-.game-container .game-block .back img {
-    width: 140px;
-    height: 140px;
-    margin-top: 30px;
-}
-
+/* Card Faces */
 .game-container .game-block .face {
     position: absolute;
     width: 100%;
@@ -78,9 +62,58 @@ body {
     border: 5px solid #2196f3;
 }
 
-.game-container .game-block .is-flipped {
-    -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-
+.game-container .game-block .front {
+    background-color: #333;
+    line-height: 200px;
+    z-index: 2;
 }
+
+.game-container .game-block .front::before {
+    content: '?';
+    color: #fff;
+    font-size: 140px;
+    font-weight: bold;
+}
+
+.game-container .game-block .back {
+    background-color: #607D8B;
+    transform: rotateY(180deg);
+}
+
+.game-container .game-block .back img {
+    width: 140px;
+    height: 140px;
+    margin-top: 30px;
+}
+
+/* Game States */
+.game-container .game-block.has-match,
+.game-container .game-block.is-flipped {
+    transform: rotateY(180deg);
+    pointer-events: none;
+}
+
+.control-buttons {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgb(33, 150, 243, 0.9);
+}
+
+.control-buttons span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f44336;
+    color: #fff;
+    padding: 10px 25px;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
